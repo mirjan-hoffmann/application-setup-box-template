@@ -8,11 +8,11 @@ The integration of [Vagrant](https://www.vagrantup.com/) also makes it possible 
 
 ## Create a new box from this template
 
-1. In this github-repo, click the green button `Use this template` or click [here](generate)
+1. In this github-repo, click the green button `Use this template` or click [here](../../generate)
 1. Enter a name for the new box and click `Create repository from template`
 1. In the created repository you have to finalize the setup of the box - head over to this repository now.
     1. Edit the configuration of the box in [box-config.yaml](box-config.yaml) completely to your needs and commit the changes
-    1. After committing to GitHub, a [GitHub Action](actions) is started automatically that initializes the repo. Wait until this is complete.
+    1. After committing to GitHub, a [GitHub Action](../../actions) is started automatically that initializes the repo. Wait until this is complete.
     1. Done, your Box should be ready now.
 
 ## Why does it take several steps to create the new box?
