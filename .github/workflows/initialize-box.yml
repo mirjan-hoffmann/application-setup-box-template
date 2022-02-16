@@ -46,4 +46,8 @@ jobs:
 
       - name: Copy repo files
         shell: bash
-        run: rsync -r ./tmp-repo/*/ . && rm -rf ./tmp-repo
+        run: rsync -r ./tmp-repo/*/ . && rm -rf ./tmp-repo && ls -l
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Initialized box"
