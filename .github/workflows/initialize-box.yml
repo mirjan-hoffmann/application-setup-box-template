@@ -1,0 +1,29 @@
+name: Initialize box from template
+on: push
+
+#on:
+#  push:
+#    paths:
+#      - box-config.yaml
+jobs:
+  init:
+    name: Reinitialize repository
+    runs-on: ubuntu-latest
+    steps:
+      #- name: Exit for template repository
+      #  shell: bash
+      #  run: |
+      #    curl --silent -X GET \
+      #    -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+      #    -H "Accept: application/json" \
+      #    https://api.github.com/repos/$GITHUB_REPOSITORY \
+      #    | jq --exit-status '.is_template == false'
+
+      - uses: actions/checkout@v2
+
+      - name: Create cookiecutter.json
+        shell: bash
+        run: |
+          yq ".box_name = \"${{ github.event.repository.name }}\" | .short_name = \"{{ cookiecutter.box_name | replace('-box', '') }}\"" \
+          -o json
+          box-config.yaml
