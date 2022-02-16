@@ -25,4 +25,8 @@ jobs:
         shell: bash
         run: |
           yq ".box_name = \"${{ github.event.repository.name }}\" | .short_name = \"{{ cookiecutter.box_name | replace('-box', '') }}\"" \
-          -o json box-config.yaml
+          -o json box-config.yaml > cookiecutter.json
+
+      - name: Scaffolding repository
+        shell: bash
+        run: cat cookiecutter.json && cookiecutter --no-input --output-dir ./tmp-repo .
