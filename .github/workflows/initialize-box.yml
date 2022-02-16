@@ -1,23 +1,21 @@
 name: Initialize box from template
-on: push
-
-#on:
-#  push:
-#    paths:
-#      - box-config.yaml
+on:
+  push:
+    paths:
+      - box-config.yaml
 jobs:
   init:
     name: Reinitialize repository
     runs-on: ubuntu-latest
     steps:
-      #- name: Exit for template repository
-      #  shell: bash
-      #  run: |
-      #    curl --silent -X GET \
-      #    -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-      #    -H "Accept: application/json" \
-      #    https://api.github.com/repos/$GITHUB_REPOSITORY \
-      #    | jq --exit-status '.is_template == false'
+      - name: Exit for template repository
+        shell: bash
+        run: |
+          curl --silent -X GET \
+          -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/json" \
+          https://api.github.com/repos/$GITHUB_REPOSITORY \
+          | jq --exit-status '.is_template == false'
 
       - uses: actions/checkout@v2
 
@@ -38,3 +36,14 @@ jobs:
       - name: Scaffolding repository
         shell: bash
         run: cat cookiecutter.json && cookiecutter --no-input --output-dir ./tmp-repo .
+
+      - name: Prepare new directory structure and remove unnecessary files
+        shell: bash
+        run: |
+          find ./ -maxdepth 1 \
+          ! -name '.' ! -name '.git' ! -name 'tmp-repo' \
+          -exec rm -rf {} +
+
+      - name: Copy repo files
+        shell: bash
+        run: rsync -r ./tmp-repo/*/ . && rm -rf ./tmp-repo
