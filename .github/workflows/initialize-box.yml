@@ -48,6 +48,7 @@ jobs:
         shell: bash
         run: rsync -r ./tmp-repo/*/ . && rm -rf ./tmp-repo && ls -l
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "Initialized box"
