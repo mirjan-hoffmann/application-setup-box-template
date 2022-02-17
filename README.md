@@ -1,3 +1,6 @@
+!! This draft-repo will be archived !!
+Use https://github.com/TIBHannover/application-setup-box-template instead
+
 # Template for creating an application-setup-box
 
 This template should help to set up a new "application-setup-box" (or "ansible-vagrant-box") as easy as possible. Such a box contains [Ansible](https://www.ansible.com/) scripts that are used to install an application / service automatically on any system. 
